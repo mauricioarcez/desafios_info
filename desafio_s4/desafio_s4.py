@@ -5,7 +5,7 @@ def agregar_inmueble():
     
     ''' Crea un dict(nuevo_inmueble) y lo agrega a list(inmuebles). no necesita parametros, se va creando mediante preguntas al usuario.'''
     
-    inmueble = {'año': None, 'metros': None, 'habitaciones':None, 'garaje': None, 'zona': None, 'estado': None }
+    inmueble = {'id':None, 'año': None, 'metros': None, 'habitaciones':None, 'garaje': None, 'zona': None, 'estado': None }
 
     while True:
         año_ingresado = input('Ingrese numericamente el año de creacion del inmueble:\n-> ')
@@ -102,6 +102,9 @@ def agregar_inmueble():
                     break
                 else:
                     continue
+        
+        id_ingresado = len(inmuebles) + 1
+        inmueble['id'] = id_ingresado
                 
         inmuebles.append(inmueble)
         print(f'\nInmueble agregado con exito!\n{inmueble}')
