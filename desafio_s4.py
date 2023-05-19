@@ -1,4 +1,10 @@
-from lista_inmuebles import inmuebles
+#Lista de inmuebles para agregar/modificar/eliminar
+inmuebles = [
+    {'id':1, 'año': 2010, 'metros': 150, 'habitaciones': 4, 'garaje': True, 'zona': 'C', 'estado': 'Disponible'},
+    {'id':2, 'año': 2016, 'metros': 80, 'habitaciones': 2, 'garaje': False, 'zona': 'B', 'estado': 'Reservado'},
+    {'id':3, 'año': 2000, 'metros': 180, 'habitaciones': 4, 'garaje': True, 'zona': 'A', 'estado': 'Disponible'},
+    {'id':4, 'año': 2015, 'metros': 95, 'habitaciones': 3, 'garaje': True, 'zona': 'B', 'estado': 'Vendido'},
+    {'id':5, 'año': 2008, 'metros': 60, 'habitaciones': 2, 'garaje': False, 'zona': 'C', 'estado': 'Disponible'}]
 
 # Funcion para agregar un inmueble nuevo a la lista
 def agregar_inmueble():
@@ -111,7 +117,7 @@ def agregar_inmueble():
         break
 
 # Lista de las caracteristicas que pueden ser editables
-caracteristicas = ['id','año','metros','habitaciones','garaje','zona','estado']
+caracteristicas = ['año','metros','habitaciones','garaje','zona','estado']
 # Convertir la lista a string y entre comillas para una mejor experiencia visual al usuario.
 espaciado = ''
 for x in caracteristicas:
@@ -120,7 +126,7 @@ for x in caracteristicas:
 #Funcion para editar un inmueble 
 def editar_inmueble(id_inmueble,atributo,valor_nuevo):
     
-    '''Edita y cambia el valor de una caracteristica de un inmueble.
+    '''Edita y cambia el valor de la caracteristica de un inmueble.
     Recibe 3 parametros en este orden: 1.El id del inmueble a modificar. 2.La caracteristica del inmueble a modificar. 3.El valor que quiere reemplazar en la caracteristica seleccionada.
     permite caracteristicas en mayusculas y minusculas pero debe ser siempre agregada entre comillas.'''
     
