@@ -110,4 +110,26 @@ def agregar_inmueble():
         print(f'\nInmueble agregado con exito!\n{inmueble}')
         break
 
-agregar_inmueble()
+# Lista de las caracteristicas que pueden ser editables
+caracteristicas = ['id','año','metros','habitaciones','garaje','zona','estado']
+# Convertir la lista a string y entre comillas para una mejor experiencia visual al usuario.
+espaciado = ''
+for x in caracteristicas:
+    espaciado+= '\'' + x +'\'' + ', '
+    
+#Funcion para editar un inmueble 
+def editar_inmueble(id_inmueble,atributo,valor_nuevo):
+    
+    '''Edita y cambia el valor de una caracteristica de un inmueble.
+    Recibe 3 parametros en este orden: 1.El id del inmueble a modificar. 2.La caracteristica del inmueble a modificar. 3.El valor que quiere reemplazar en la caracteristica seleccionada.
+    permite caracteristicas en mayusculas y minusculas pero debe ser siempre agregada entre comillas.'''
+    
+    atributo_minus = atributo.lower()
+    print(f'En el inmueble seleccionado:\n{inmuebles[id_inmueble-1]}\n')
+    if atributo_minus in caracteristicas:
+        valor_antiguo = inmuebles[id_inmueble-1][atributo_minus]
+        nuevo_valor = inmuebles[id_inmueble-1][atributo_minus] = valor_nuevo
+        return f'has cambiado {atributo_minus}: {valor_antiguo} a {atributo_minus}: {nuevo_valor}'
+    else:
+        return f'{atributo.upper()} No es una caracteristica editable\nLas caracteristicas son:\n{espaciado}\nIngresadas SIEMPRE entre comillas \'\'.'
+        
