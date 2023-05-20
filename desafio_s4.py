@@ -135,7 +135,44 @@ def editar_inmueble(id_inmueble,atributo,valor_nuevo):
     if atributo_minus in caracteristicas:
         valor_antiguo = inmuebles[id_inmueble-1][atributo_minus]
         nuevo_valor = inmuebles[id_inmueble-1][atributo_minus] = valor_nuevo
-        return f'has cambiado {atributo_minus}: {valor_antiguo} a {atributo_minus}: {nuevo_valor}'
+        print(f'has cambiado {atributo_minus}: {valor_antiguo} a {atributo_minus}: {nuevo_valor}')
     else:
-        return f'{atributo.upper()} No es una caracteristica editable\nLas caracteristicas son:\n{espaciado}\nIngresadas SIEMPRE entre comillas \'\'.'
+        print(f'{atributo.upper()} No es una caracteristica editable\nLas caracteristicas son:\n{espaciado}\nIngresadas SIEMPRE entre comillas \'\'.')
+
+
+# Funcion para eliminar un inmueble de la lista     
+def eliminar_inmueble(id_inm):
+    
+    '''Elimina un inmueble de la lista segun el ID que se le pase como argumento. Imprime la lista eliminada'''
+    
+    print(f"\nHas eliminado este inmueble de la lista:\n{inmuebles[id_inm-1]}")
+    inmuebles.remove(inmuebles[id_inm-1])
+    
+def busqueda(lista,presupuesto):
+    
+    '''Busca los inmuebles Disponibles o Reservados que sean menor o igual a un presupuesto dado por el usuario e imprime en pantalla una lista de inmuebles filtrados que cumplan los requisitos'''
+    
+    def calcular_precio_inmueble(diccionario):
         
+        '''calcula el precio de un inmueble particular. funciona solo localmente. recibe como parametro un diccionario de la lista de inmuebles'''
+        
+        precio_base = diccionario['metros'] * 100 + diccionario['habitaciones'] * 500 + diccionario['garaje'] * 1500
+        antiguedad = 2023 - diccionario['año']
+        
+        if diccionario['zona'] == 'A':
+            precio = precio_base * (1 - antiguedad / 100)
+        elif diccionario['zona'] == 'B':
+            precio = precio_base * (1 - antiguedad / 100)* 1.5
+        else:
+            precio = precio_base * (1 - antiguedad / 100) * 2
+        return precio
+	
+    inmuebles_accesibles = []
+    for inmueble in lista:
+        if presupuesto < calcular_precio_inmueble(inmueble) and inmueble['estado'] == 'Disponible' or inmueble['estado'] == 'Reservado':
+            inmuebles_accesibles.append(inmueble)
+        
+        print(f'Aqui tienes una lista de inmuebles que sean menor o igual a tu presupuesto y su estado sea Disponible o Reservado:')
+        for inmueble in inmuebles_accesibles:
+            print(inmueble)
+    
