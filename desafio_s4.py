@@ -147,7 +147,8 @@ def eliminar_inmueble(id_inm):
     
     print(f"\nHas eliminado este inmueble de la lista:\n{inmuebles[id_inm-1]}")
     inmuebles.remove(inmuebles[id_inm-1])
-    
+
+# Funcion para buscar inmuebles segun un presupuesto    
 def busqueda(lista,presupuesto):
     
     '''Busca los inmuebles Disponibles o Reservados que sean menor o igual a un presupuesto dado por el usuario e imprime en pantalla una lista de inmuebles filtrados que cumplan los requisitos'''
