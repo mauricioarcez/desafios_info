@@ -168,12 +168,18 @@ def busqueda(lista,presupuesto):
             precio = precio_base * (1 - antiguedad / 100) * 2
         return precio
 	
+    # Crea una lista de inmuebles vacia y agrega las que cumplan el presupuesto
     inmuebles_accesibles = []
     for inmueble in lista:
-        if presupuesto < calcular_precio_inmueble(inmueble) and inmueble['estado'] == 'Disponible' or inmueble['estado'] == 'Reservado':
-            inmuebles_accesibles.append(inmueble)
-        
+        if presupuesto >= calcular_precio_inmueble(inmueble):
+            if inmueble['estado'] == 'Disponible' or inmueble['estado'] == 'Reservado':
+                # Agrega el precio al diccionario y luego el diccionario a la lista.
+                inmueble['precio'] = calcular_precio_inmueble(inmueble)
+                inmuebles_accesibles.append(inmueble)
+    if len(inmuebles_accesibles) >= 1:
         print(f'Aqui tienes una lista de inmuebles que sean menor o igual a tu presupuesto y su estado sea Disponible o Reservado:')
         for inmueble in inmuebles_accesibles:
             print(inmueble)
+    else:
+        print('Lo siento. No hay inmuebles Disponibles o Reservados por ese precio.')
     
