@@ -156,3 +156,11 @@ def busqueda(lista,presupuesto):
     else:
         print('Lo siento. No hay inmuebles Disponibles o Reservados por ese precio.')
         
+'''
+Participantes: 
+Ivan
+Alexis
+Mauricio
+Valentino
+
+'''
