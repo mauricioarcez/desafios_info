@@ -11,6 +11,9 @@ inmuebles = [
 
 # Funcion para validar datos
 def validar_datos(mensaje,tipo,min_valor=None,max_valor=None,condiciones=None):
+    
+    '''Valida los datos ingresados para que los enteros sean enteros, los strings sean str, y los booleanos bool. Recibe un input como mensaje. Luego debes definir el tipo(str,int,bool), el valor minimo en caso de elegir int y su valor maximo. O las condiciones para que sea aceptado en caso de elegir str'''
+    
     while True:
         entrada = input(mensaje)
         if tipo == 'int':
