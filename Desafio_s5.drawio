@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-05-27T05:53:31.938Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="tA7NnaS66SLW1mmomG-0" version="21.3.4" type="github">
+<mxfile host="app.diagrams.net" modified="2023-05-27T05:59:46.796Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="FOGRFisnf-emFLXVFUsF" version="21.3.4" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="2182" dy="1952" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="0" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="1091" dy="1526" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="0" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -794,6 +794,9 @@
             <mxPoint x="1300" y="10" as="sourcePoint" />
             <mxPoint x="1400" y="-90" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="5o4xbBL1ZPF9Y1dV_yGu-252" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;b&gt;explicacion:&lt;/b&gt;&lt;/font&gt;&amp;nbsp;&lt;br&gt;&lt;br&gt;&lt;i&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Usuario es la categoria padre, colaboradores y publico registrado son sus hijas. Estas heredan todos los atributos de usuario mas sus atributos unicos de la entidad. estas dos entidades hijas tienen una relacion con los articulos. Los colaboradores lo publican y los lectores la comentan. estos articulos se dividen en categorias, y estas se dividen en sub categorias, que es una entidad hija de categorias y hereda a la vez todos sus atributos.&amp;nbsp;&lt;/font&gt;&lt;/i&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="310" y="250" width="950" height="130" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
