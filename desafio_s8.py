@@ -27,12 +27,10 @@ class Usuario:
     def __repr__(self):
         return f'{self.username}'
     
-    def login(username,contraseña):
-        for x in Usuario.lista_usuarios:
-            if x.username == username.lower() and x.__contraseña == contraseña:
-                x.online = True
-                print(f'\nBienvenido ¡{username}!')
-                break
+    def login(self,username,contraseña):
+        if self.username == username.lower() and self.__contraseña == contraseña:
+            self.online = True
+            print(f'\nBienvenido ¡{username}!')
         else:
             print('Usuario o contraseña ingresada no es correcta')
             
@@ -54,7 +52,6 @@ class Usuario:
                 r_telefono = input('Por ultimo ingrese su numero de telefono:\n-> ')
                 print(f'¡Usuario creado con exito!, {r_username}\nAhora puedes iniciar sesion con tu username y tu contraseña.\n')
                 r_username = Usuario(r_nombre,r_apellido,r_telefono,r_username,r_email,r_contraseña)
-                print(r_username.id)
                 break
             
 
@@ -62,4 +59,10 @@ x1 = Usuario('mauricio', 'arce', '3624822158', 'mauricioarcez', 'mauricioarcez23
 x2 = Usuario('juan','perez','3624678953','juancito01','juancito01@gmail.com','123juan')
 x3 = Usuario('lionel','messi','3624638503','liomessi22','liomessi@gmail.com','messi35')
 
+print(Usuario.lista_usuarios)
+x1.login('mauricioarcez','123mauri')
+print(x1.online)
+print(x3.online)
+
+Usuario.registrar()
 print(Usuario.lista_usuarios)
