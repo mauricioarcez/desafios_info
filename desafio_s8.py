@@ -1,68 +1,61 @@
 from datetime import datetime
 
 class Usuario:
+    contador_id = 0
+    usuarios_registrados = []
     
-    lista_usuarios = [] # Usuarios totales
-    contador_id = 0 # Id auto-incremental
-    
-    def __init__(self,nombre,apellido,telefono,username,email,contraseña):
+    def __init__(self,nombre,apellido):
         self.nombre = nombre
         self.apellido = apellido
-        self._telefono = telefono
-        self.username = username.lower()
-        self.email = email
-        self.__contraseña = contraseña 
         
-        self.fecha_registro = datetime.now() # Fecha actual
-        self.avatar = 'avatar.png' # Por defecto
+        self._telefono = None
+        self.username = None
+        self.email = None
+        self.__contraseña = None 
+        self.fecha_registro = None
+        self.avatar = None
         self.estado = None
+        self.online = None
+        self.id = None
+               
+    def registrar(self, username, contraseña, email, telefono):
+        self.username = username.lower()
+        self.__contraseña = contraseña
+        self.email = email
+        self._telefono = telefono
+        
+        self.fecha_registro = datetime.now()
+        self.avatar = 'avatar.png' 
+        self.estado = '--'
         self.online = False
         self.id = self.generador_id()
-        self.lista_usuarios.append(self)
         
-    def generador_id(self):
-        Usuario.contador_id += 1
-        return Usuario.contador_id
-    
     def __repr__(self):
-        return f'{self.username}'
+        return f'{self.username}'   
     
-    def login(self,username,contraseña):
+    def generador_id(self): 
+        if self.username is not None:
+            Usuario.contador_id += 1
+            Usuario.usuarios_registrados.append(self)
+            return Usuario.contador_id
+    
+    def login(self, username, contraseña):
         if self.username == username.lower() and self.__contraseña == contraseña:
             self.online = True
-            print(f'\nBienvenido ¡{username}!')
+            print(f'\n.... INICIANDO SESION ....\n Bienvenido ¡{username}!\n')
         else:
             print('Usuario o contraseña ingresada no es correcta')
             
-    def registrar():
-        while True:
-            usuario_disponible = True
-            r_username = input('Ingrese un nombre de usuario para registrarse:\n-> ')
-            
-            for x in Usuario.lista_usuarios:
-                if x.username == r_username:
-                    print('El nombre de usuario ingresado se encuentra en uso')
-                    usuario_disponible = False
-                    break
-            if usuario_disponible:
-                r_contraseña = input('Ingrese una contraseña para iniciar sesion:\n-> ')
-                r_email = input('Ingrese un email para verificar su cuenta:\n-> ')
-                r_nombre = input('Ingrese su nombre real:\n-> ')
-                r_apellido = input('Ingrese su apellido:\n-> ')
-                r_telefono = input('Por ultimo ingrese su numero de telefono:\n-> ')
-                print(f'¡Usuario creado con exito!, {r_username}\nAhora puedes iniciar sesion con tu username y tu contraseña.\n')
-                r_username = Usuario(r_nombre,r_apellido,r_telefono,r_username,r_email,r_contraseña)
-                break
-            
 
-x1 = Usuario('mauricio', 'arce', '3624822158', 'mauricioarcez', 'mauricioarcez23@gmail.com', '123mauri')
-x2 = Usuario('juan','perez','3624678953','juancito01','juancito01@gmail.com','123juan')
-x3 = Usuario('lionel','messi','3624638503','liomessi22','liomessi@gmail.com','messi35')
+x1 = Usuario('mauricio','arce')
+x2 = Usuario('juan','perez')
 
-print(Usuario.lista_usuarios)
-x1.login('mauricioarcez','123mauri')
-print(x1.online)
-print(x3.online)
+x1.registrar('mauricioarcez','123456','mauricioarcez23@gmail.com',3624822158)
+x2.registrar('juanperez14','14juan','juancito01@gmail.com',232234294)
 
-Usuario.registrar()
-print(Usuario.lista_usuarios)
+print(x2.id)
+print(Usuario.usuarios_registrados)
+
+x1.login('mauricioarcez','fake')
+x2.login('juanperez14','14juan')
+
