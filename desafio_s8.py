@@ -1,61 +1,63 @@
 from datetime import datetime
 
 class Usuario:
-    contador_id = 0
-    usuarios_registrados = []
-    
-    def __init__(self,nombre,apellido):
-        self.nombre = nombre
-        self.apellido = apellido
-        
-        self._telefono = None
-        self.username = None
-        self.email = None
-        self.__contraseña = None 
-        self.fecha_registro = None
-        self.avatar = None
-        self.estado = None
-        self.online = None
-        self.id = None
-               
-    def registrar(self, username, contraseña, email, telefono):
-        self.username = username.lower()
-        self.__contraseña = contraseña
-        self.email = email
-        self._telefono = telefono
-        
-        self.fecha_registro = datetime.now()
-        self.avatar = 'avatar.png' 
-        self.estado = '--'
-        self.online = False
-        self.id = self.generador_id()
-        
-    def __repr__(self):
-        return f'{self.username}'   
-    
-    def generador_id(self): 
-        if self.username is not None:
-            Usuario.contador_id += 1
-            Usuario.usuarios_registrados.append(self)
-            return Usuario.contador_id
-    
-    def login(self, username, contraseña):
-        if self.username == username.lower() and self.__contraseña == contraseña:
-            self.online = True
-            print(f'\n.... INICIANDO SESION ....\n Bienvenido ¡{username}!\n')
-        else:
-            print('Usuario o contraseña ingresada no es correcta')
-            
+	usuarios_registrados = []
+	usuario_existente = False
 
-x1 = Usuario('mauricio','arce')
-x2 = Usuario('juan','perez')
+	def __init__(self):
+		self.estado = '--'  # Por defecto
+		self.avatar = 'avatar.png'  # Por defecto
+		self.id = 'Registrese para obtener un ID de usuario\n'
 
-x1.registrar('mauricioarcez','123456','mauricioarcez23@gmail.com',3624822158)
-x2.registrar('juanperez14','14juan','juancito01@gmail.com',232234294)
+		self.nombre = None
+		self.apellido = None
+		self.telefono = None
+		self.username = None
+		self.email = None
+		self.__contraseña = None
+		self.fecha_registro = None
+		self.online = False
 
-print(x2.id)
+	def __repr__(self):
+		return f'{self.username}'
+
+	def registrar(self, username, contraseña, nombre, apellido, telefono, email):
+		self.username = username.lower()
+		self.__contraseña = contraseña
+		self.nombre = nombre
+		self.apellido = apellido
+		self.telefono = telefono
+		self.email = email
+		self.fecha_registro = datetime.now()  # Fecha actual de registro
+
+		for user in Usuario.usuarios_registrados:
+			if user.username == username.lower():
+				self.usuario_existente = True
+				break
+		if self.usuario_existente == False:
+			self.usuarios_registrados.append(self)
+			self.id = len(self.usuarios_registrados)
+			print(f'Usuario registrado con exito, ¡Bienvenido {username}!\n')
+		else:
+			print('El nombre de usuario elegido ya se encuentra en uso.\n')
+
+	def login(self, username, contraseña):
+		for user in self.usuarios_registrados:
+			if user.username == username and user.__contraseña == contraseña:
+				print(f'...INICIANDO SESION...\nBienvenido {self.username}\n')
+				self.online = True
+				return
+		print('Usuario o contraseña ingresada es incorrecta\n')
+
+
+x1 = Usuario()
+x2 = Usuario()
+x3 = Usuario()
+
 print(Usuario.usuarios_registrados)
-
-x1.login('mauricioarcez','fake')
-x2.login('juanperez14','14juan')
-
+x1.registrar('mauricioarcez', '123mauri', 'mauricio','arce', 3624822158, 'mauricioarcez23@gmail.com')
+x2.registrar('mauricioarcez', 'mauuu', 'mauricio', 'arce', 1176849284, 'mauricio_arce@gmail.com.ar')
+print(Usuario.usuarios_registrados)
+print(x1.id)
+print(x2.id)
+x1.login('mauricioarcez', '123mauri')
