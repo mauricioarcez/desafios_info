@@ -66,6 +66,25 @@ class Usuario:
 		print('|   PRESIONE 1 PARA REGISTRARSE                                   |')
 		print('|   PRESIONES 2 PARA INICIAR SESION [Si esta registrado]          |')
 		print('|_________________________________________________________________|\n')
+		
+		def mostrar_contenido():
+			if self.online:
+				print(' _________________________________________________________________ ')
+				print('|                                                                 |')
+				print('|   INFOnews                                   [ Cerrar Sesion ]  |')
+				print('|_________________________________________________________________|')
+				print('|   _____________________      _______________________            |')
+				print('|  |                     |    |                       |           |')
+				print('|  |                     |    |                       |           |')
+				print('|  |  Articulo1.imagen   |    | + [PUBLICAR ARTICULO] |           |')
+				print('|  |                     |    |                       |           |')
+				print('|  |_____________________|    |_______________________|           |')
+				print('|  .Boca volvio a perder      .PRESIONE 3 PARA AGREGAR            |')
+				print('|   de local. [Ver mas]        UN ARTICULO                        |')
+				print('|                                                                 |')
+				print('|                                                                 |')
+				print('|  PRESIONE 4 PARA COMENTAR UN ARTICULO.                          |')
+				print('|_________________________________________________________________|\n')
 
 		while True:
 			decision = int(input('Ingrese su eleccion:\n-> '))
@@ -78,12 +97,15 @@ class Usuario:
 				email = input('Ingrese su email:\n-> ')
 
 				self.registrar(nombre_usuario,contraseña,nombre,apellido,telefono,email)
+				self.login(nombre_usuario,contraseña)
+				mostrar_contenido()
 				return False
 
 			elif decision == 2:
 				nombre_usuario = input('Ingrese su nombre de usuario:\n-> ')
 				contraseña = input('Ingrese su contraseña:\n-> ')
 				self.login(nombre_usuario,contraseña)
+				mostrar_contenido()
 				return False
 			else:
 				print('Opciones no disponibles\n')
