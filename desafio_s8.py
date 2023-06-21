@@ -121,6 +121,9 @@ class Comentario():
         self.id = Comentario.contador_id
         self.fecha_hora = datetime.now()
         self.estado = 'Activo'
+    
+    def __repr__(self):
+        return f'{self.contenido}'
         
 
 class Publico(Usuario):
@@ -187,7 +190,7 @@ class Colaborador(Usuario):
 
 #Creacion de usuario. con solo avatar y estado.
 u1 = Usuario()
-
+u1.menu()
 
 
 
