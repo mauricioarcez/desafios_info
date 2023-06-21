@@ -71,7 +71,7 @@ class Usuario:
 			if self.online:
 				print(' _________________________________________________________ ')
 				print('|                                                         |')
-				print('|   INFOnews                           [ Cerrar Sesion ]  |')
+				print('|   INFOnews                          [5.Cerrar Sesion ]  |')
 				print('|_________________________________________________________|')
 				print('|   _____________________     _______________________     |')
 				print('|  |                     |   |                       |    |')
@@ -97,9 +97,13 @@ class Usuario:
 				email = input('Ingrese su email:\n-> ')
 
 				self.registrar(nombre_usuario,contraseña,nombre,apellido,telefono,email)
-				self.login(nombre_usuario,contraseña)
-				mostrar_contenido()
-				return False
+				iniciar = int(input('Desea Inciar sesion? 1/2\n1->NO.\n2->SI\n-> '))
+				if iniciar == 2:
+					self.login(nombre_usuario,contraseña)
+					mostrar_contenido()
+				else:
+					print('Hasta luego!..')
+					return False
 
 			elif decision == 2:
 				nombre_usuario = input('Ingrese su nombre de usuario:\n-> ')
