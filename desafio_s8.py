@@ -50,23 +50,27 @@ class Usuario:
 		print('Usuario o contraseña ingresada es incorrecta\n')
     
 	def menu(self):
-		print(' _________________________________________________________ ')
-		print('|                                                         |')
-		print('|   INFOnews          [1.Registrarse] [2.Iniciar sesion]  |')
-		print('|_________________________________________________________|')
-		print('|   _____________________     _____________________       |')
-		print('|  |                     |   |                     |      |')
-		print('|  |   [Inicia sesion]   |   |   [Inicia sesion]   |      |')
-		print('|  | para leer articulos |   | para leer articulos |      |')
-		print('|  |  [ARTICULO OCULTO]  |   |  [ARTICULO OCULTO]  |      |')
-		print('|  |_____________________|   |_____________________|      |')
-		print('|  . Titulo oculto           . Titulo oculto              |')
-		print('|                                                         |')
-		print('|                                                         |')
-		print('|  PRESIONE 1 PARA REGISTRARSE                            |')
-		print('|  PRESIONES 2 PARA INICIAR SESION [Si esta registrado]   |')
-		print('|_________________________________________________________|\n')
-		
+		def menu_principal():
+			print(' _________________________________________________________ ')
+			print('|                                                         |')
+			print('|   INFOnews          [1.Registrarse] [2.Iniciar sesion]  |')
+			print('|_________________________________________________________|')
+			print('|   _____________________     _____________________       |')
+			print('|  |                     |   |                     |      |')
+			print('|  |   [Inicia sesion]   |   |   [Inicia sesion]   |      |')
+			print('|  | para leer articulos |   | para leer articulos |      |')
+			print('|  |  [ARTICULO OCULTO]  |   |  [ARTICULO OCULTO]  |      |')
+			print('|  |_____________________|   |_____________________|      |')
+			print('|  . Titulo oculto           . Titulo oculto              |')
+			print('|                                                         |')
+			print('|                                                         |')
+			print('| PRESIONE 1 PARA REGISTRARSE                             |')
+			print('| PRESIONES 2 PARA INICIAR SESION [Si esta registrado]    |')
+			print('| PRESIONES 3 PARA PUBLICAR UN ARTICULO [Si es colab]     |')
+			print('| PRESIONES 4 PARA COMENTAR UN ARTICULO [publico/colab]   |')
+			print('|_________________________________________________________|\n')
+		menu_principal()
+  
 		def mostrar_contenido():
 			if self.online:
 				print(' _________________________________________________________ ')
@@ -74,20 +78,22 @@ class Usuario:
 				print('|   INFOnews                          [5.Cerrar Sesion ]  |')
 				print('|_________________________________________________________|')
 				print('|   _____________________     _______________________     |')
+				print('|  | ID#1                |   | ID#                   |    |')
 				print('|  |                     |   |                       |    |')
-				print('|  |                     |   |                       |    |')
-				print('|  |  Articulo1.imagen   |   | + [PUBLICAR ARTICULO] |    |')
+				print('|  |   Boca.imagen.png   |   | + [PUBLICAR ARTICULO] |    |')
 				print('|  |                     |   |                       |    |')
 				print('|  |_____________________|   |_______________________|    |')
-				print('|  .Boca volvio a perder     .PRESIONE 3 PARA AGREGAR     |')
-				print('|   de local. [Ver mas]       UN ARTICULO                 |')
+				print('|  .BOCA VOLVIO A PERDER     .PRESIONE 3 PARA AGREGAR     |')
+				print('|   DE LOCAL. [4]             UN ARTICULO                 |')
 				print('|                                                         |')
-				print('|                                                         |')
-				print('|  PRESIONE 4 PARA COMENTAR UN ARTICULO.                  |')
+				print('| PRESIONE 4 PARA COMENTAR UN ARTICULO.                   |')
+				print('| PRESIONE 5 PARA ABANDONAR INFOnews.                     |')
 				print('|_________________________________________________________|\n')
 
 		while True:
+   
 			decision = int(input('Ingrese su eleccion:\n-> '))
+   
 			if decision == 1:
 				nombre_usuario = input('Ingrese su nombre de usuario:\n-> ')
 				contraseña = input('Ingrese su contraseña:\n-> ')
@@ -97,23 +103,54 @@ class Usuario:
 				email = input('Ingrese su email:\n-> ')
 
 				self.registrar(nombre_usuario,contraseña,nombre,apellido,telefono,email)
-				iniciar = int(input('Desea Inciar sesion? 1/2\n1->NO.\n2->SI\n-> '))
-				if iniciar == 2:
+				se_registro = True
+				username = nombre_usuario
+				password = contraseña
+				iniciar = int(input('Desea Inciar sesion? 1/2\n1->SI.\n2->NO.\n-> '))
+				if iniciar == 1:
 					self.login(nombre_usuario,contraseña)
 					mostrar_contenido()
 				else:
-					print('Hasta luego!..')
-					return False
+					print('Hasta luego!..\n')
+					menu_principal()
+					continue
 
-			elif decision == 2:
-				nombre_usuario = input('Ingrese su nombre de usuario:\n-> ')
-				contraseña = input('Ingrese su contraseña:\n-> ')
-				self.login(nombre_usuario,contraseña)
+			elif decision == 2 and se_registro == True:
+				self.login(username,password)
 				mostrar_contenido()
-				return False
-			else:
-				print('Opciones no disponibles\n')
-				return False
+
+			elif decision == 3:
+				publicar = input('Para publicar articulos debes ser colaborador.\nDeseas registrarte como colaborador?\n1->SI\n2->NO.\n-> ')
+				if publicar == 1:
+					u1 = Usuario()
+					u1.registrar(nombre_usuario,contraseña,nombre,apellido,telefono,email)
+					c1 = Colaborador(u1)
+					c1.registrar()
+					titulo = input('Ingrese un titulo llamativo para su articulo:\n-> ').upper()
+					resumen = input('Ingrese un resumen del titulo:\n-> ').capitalize()
+					contenido = input('Ingrese el contenido explicativo de su articulo:\n-> ')
+					imagen = input('Ingrese la imagen que resaltara el articulo:\n-> ')
+
+					titulo = c1.publicar(titulo,resumen,contenido,imagen,self.id)
+					print(f' ___________________________________________________ ')
+					print(f'|                                                    ')
+					print(f'|   INFOnews                     [5.Cerrar Sesion ]  ')
+					print(f'|____________________________________________________')
+					print(f'|   __________________________________')
+					print(f'|  | ID#{titulo.id}')
+					print(f'|  |                                          ')
+					print(f'|  |               {titulo.imagen}.png')
+					print(f'|  |                                          ')
+					print(f'|  |___________________________________')
+					print(f'|  .{titulo.titulo}')
+					print(f'|    AUTOR: {self.username},ID#{self.id}')
+					print(f'| \"{titulo.resumen}')
+					print(f'|')
+					print(f'|    {titulo.contenido}')
+				else:
+					print('Debes registrarte como usuario primero antes de ser Colaborador.')
+					continue
+					
 
 class Articulo():
 
@@ -217,7 +254,7 @@ class Colaborador(Usuario):
 #Creacion de usuario. con solo avatar y estado.
 u1 = Usuario()
 
-#Menu intuitivo a seguir los pasos.
+#Menu intuitivo a seguir los pasos para registrarse o inicar sesion.
 u1.menu()
 
 
