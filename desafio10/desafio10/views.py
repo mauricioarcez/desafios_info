@@ -2,9 +2,7 @@ from django.shortcuts import render
 
 def index(request):
     
-    template_name = 'index.html'
-    nombres = ['mauri','leo','nai']
-    contexto = {'nombres': nombres}    
+    template_name = 'index.html'  
     
-    return render(request,template_name,contexto)
+    return render(request,template_name)
 
