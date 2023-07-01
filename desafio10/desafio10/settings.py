@@ -23,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c+j(82zqskpu1^eu+0r5p-&+n+ic2+5#e8k^(d+ox_*i4usfho'
 # ---------------------------------------------------
 # SECURITY WARNING: don't run with debug turned on in production!
+AUTH_USER_MODEL = 'user.User'
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #Apps propias
-    'apps.users',
+    'apps.user',
 ]
 # ---------------------------------------------------
 MIDDLEWARE = [
@@ -77,8 +78,11 @@ WSGI_APPLICATION = 'desafio10.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'desafio10',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'PORT': '3306'
     }
 }
 
